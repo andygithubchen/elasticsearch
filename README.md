@@ -1,7 +1,7 @@
 #ElasticSearch(ES):
 
 
-###生产配置
+**生产配置**
 ```shell
 一、配置index模板为 20个分片，0个副本，最大查询结果数1000000
 curl --user elastic:sTV213z -XPUT "http://192.168.2.250:9200/_template/all" -H 'Content-Type: application/json' -d'
@@ -25,7 +25,7 @@ curl -H "Content-Type: application/json" -XPUT "${host}:9200/_xpack/license?ackn
 ```
 
 
-###ES 的批量操作
+**ES 的批量操作**
 ```shell
 一、 批量创建：
 curl --user elastic:Sstd4 -XPOST "http://192.168.2.250:9200/_bulk" -H 'Content-Type: application/json' -d'
@@ -85,7 +85,7 @@ http://192.168.2.250:9200/index/index/errorLog
 ]
 ```
 
-###ES 最简单的批量操作 (存在就替换，否则新增)
+**ES 最简单的批量操作 (存在就替换，否则新增)**
 
 ```shell
 curl --user elastic:Sstd4rp -XPOST "http://192.168.2.250:9200/_bulk" -H 'Content-Type: application/json' -d'
@@ -96,7 +96,7 @@ curl --user elastic:Sstd4rp -XPOST "http://192.168.2.250:9200/_bulk" -H 'Content
 '
 ```
 
-###常用
+**常用**
 ```shell
 #查看证书时间
 curl -XGET http://127.0.0.1:9200/_license
@@ -108,13 +108,13 @@ curl --user elastic:Sstd4r -XPOST 'http://192.168.2.250:9200/_xpack/security/use
 
 ```
 
-###查看所有节点信息
+**查看所有节点信息**
 ```shell
 curl -XGET http://127.0.0.1:9200/_nodes/stats?pretty
 ```
 
 
-###从集群中移除一个节点
+**从集群中移除一个节点**
 ```shell
 curl --user elastic:12332sdkf3 -XPUT "http://192.168.2.250:9200/_cluster/settings" -H 'Content-Type: application/json' -d'{
   "transient" :{
