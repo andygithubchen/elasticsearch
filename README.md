@@ -4,7 +4,7 @@
 ###生产配置
 ```shell
 一、配置index模板为 20个分片，0个副本，最大查询结果数1000000
-curl --user elastic:sTVzRShsf -XPUT "http://192.168.2.250:9200/_template/all" -H 'Content-Type: application/json' -d'
+curl --user elastic:sTV213z -XPUT "http://192.168.2.250:9200/_template/all" -H 'Content-Type: application/json' -d'
 {
   "template": "*",
   "settings": {
@@ -28,7 +28,7 @@ curl -H "Content-Type: application/json" -XPUT "${host}:9200/_xpack/license?ackn
 ###ES 的批量操作
 ```shell
 一、 批量创建：
-curl --user elastic:Sstd4rpkfuGyfhVif0Yq -XPOST "http://192.168.2.250:9200/_bulk" -H 'Content-Type: application/json' -d'
+curl --user elastic:Sstd4 -XPOST "http://192.168.2.250:9200/_bulk" -H 'Content-Type: application/json' -d'
 { "create": {"_type":"_doc", "_index":"log_test", "_id":1001} }
 { "test_field":"test12"}
 { "create": {"_type":"_doc", "_index":"log_test", "_id":3001} }
@@ -52,7 +52,7 @@ curl --user elastic:Sstd4rpkfuGyfhVif0Yq -XPOST "http://192.168.2.250:9200/_bulk
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 二、 创建/更新：
-curl --user elastic:Sstd4rpkfuGyfhVif0Yq -XPUT "http://192.168.2.250:9200/log_test/_doc/10" -H 'Content-Type: application/json' -d'
+curl --user elastic:Sstd4r -XPUT "http://192.168.2.250:9200/log_test/_doc/10" -H 'Content-Type: application/json' -d'
 {
   "test_field1" : 1,
     "test_field2" : "的说法是"
@@ -88,7 +88,7 @@ http://192.168.2.250:9200/index/index/errorLog
 ###ES 最简单的批量操作 (存在就替换，否则新增)
 
 ```shell
-curl --user elastic:Sstd4rpkfuGyfhVif0Yq -XPOST "http://192.168.2.250:9200/_bulk" -H 'Content-Type: application/json' -d'
+curl --user elastic:Sstd4rp -XPOST "http://192.168.2.250:9200/_bulk" -H 'Content-Type: application/json' -d'
 { "index": {"_type":"_doc", "_index":"log_test", "_id":1001} }
 { "test_field":"test12"}
 { "index": {"_type":"_doc", "_index":"log_test", "_id":3001} }
@@ -112,4 +112,21 @@ curl --user elastic:Sstd4r -XPOST 'http://192.168.2.250:9200/_xpack/security/use
 ```shell
 curl -XGET http://127.0.0.1:9200/_nodes/stats?pretty
 ```
+
+
+###从集群中移除一个节点
+```shell
+curl --user elastic:12332sdkf3 -XPUT "http://192.168.2.250:9200/_cluster/settings" -H 'Content-Type: application/json' -d'{
+  "transient" :{
+    "cluster.routing.allocation.exclude._ip" : "192.168.2.183"
+  }
+}'
+cluster.routing.allocation.exclude._ip 是要移除节点的IP，
+在执行上面的操作时不是一下子就完成的，不能马上关闭这个节点，因为ElasticSearch会将这个节点数据迁移到集群的其他节点，需要一定的时间来。'
+```
+
+
+
+
+
 
