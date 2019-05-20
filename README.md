@@ -1,5 +1,3 @@
-#ElasticSearch(ES):
-
 
 **生产配置**
 ```shell
@@ -122,7 +120,7 @@ curl --user elastic:12332sdkf3 -XPUT "http://192.168.2.250:9200/_cluster/setting
   }
 }'
 cluster.routing.allocation.exclude._ip 是要移除节点的IP，
-在执行上面的操作时不是一下子就完成的，不能马上关闭这个节点，因为ElasticSearch会将这个节点数据迁移到集群的其他节点，需要一定的时间来。'
+在执行上面的操作时不是一下子就完成的，不能马上关闭这个节点，因为ElasticSearch会将这个节点数据迁移到集群的其他节点，需要一定的时间
 ```
 
 
