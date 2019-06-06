@@ -124,6 +124,21 @@ cluster.routing.allocation.exclude._ip 是要移除节点的IP，
 ```
 
 
+**修改字段属性**
+```shell
+curl --user elastic:ddsfs3df -XPUT "http://192.168.2.250:9200/log_treasure?pretty" -H 'Content-Type: application/json' -d'
+{
+  "mappings": {
+    "_doc": {
+      "properties": {
+        "role_id": {
+          "type": "long"
+        }
+      }
+    }
+  }
+}'
+```
 
 
 
