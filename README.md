@@ -141,5 +141,15 @@ curl --user elastic:ddsfs3df -XPUT "http://192.168.2.250:9200/log_treasure?prett
 ```
 
 
+**用脚本去新增一个字段，这个字段的值等于某两个字段值的拼接字符**
+```shell
+curl --user elastic:pwdd -XPOST "http://192.168.2.250:9200/special_test/_update_by_query" -H 'Content-Type: application/json' -d'{
+  "script": {
+    "inline": "if (ctx._source.agent_id==null || ctx._source.server_id==null){ ctx._source.agent_server=null }else{ctx._source.agent_server = ctx._source.agent_id +\"\"+ ctx._source.server_id}"
+  }
+}'
+```
+
+
 
 
