@@ -150,6 +150,17 @@ curl --user elastic:pwdd -XPOST "http://192.168.2.250:9200/special_test/_update_
 }'
 ```
 
+**search.max_buckets 问题**
 
+```shell
+max_buckets 默认是 10000
+
+#查看
+ curl -XGET "192.168.2.250:9200/_cluster/settings"
+
+#调大
+curl -XPUT "192.168.2.250:9200/_cluster/settings" -d '{ "persistent": { "search" : { "max_buckets" : 35000 } } }' -H 'Content-Type: application/json'
+
+```
 
 
