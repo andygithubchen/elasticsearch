@@ -10,14 +10,14 @@ logstash=${install_path}/logstash-6.3.2
 DIR=$(cd "$(dirname "$0")";pwd)
 symbol=';'
 
-yum install java-devel
-apt install openjdk-8-jdk-headless -y
+#yum install java-devel
+#apt install openjdk-8-jdk-headless -y
 
 #1. 备份x-pack-core-6.3.1.jar
-cp ${elasticsearch}/modules/x-pack/x-pack-core/x-pack-core-6.3.1.jar ${elasticsearch}/modules/x-pack/x-pack-core/x-pack-core-6.3.1.jar_old
+#cp ${elasticsearch}/modules/x-pack/x-pack-core/x-pack-core-6.3.1.jar ${elasticsearch}/modules/x-pack/x-pack-core/x-pack-core-6.3.1.jar_old
 
 #2. 用./x-pack-core-6.3.1.jar 覆盖 x-pack-core-6.3.1.jar
-cp ./x-pack-core-6.3.1.jar ${elasticsearch}/modules/x-pack/x-pack-core/x-pack-core-6.3.1.jar
+#cp ./x-pack-core-6.3.1.jar ${elasticsearch}/modules/x-pack/x-pack-core/x-pack-core-6.3.1.jar
 
 
 #2. 编译 LicenseVerifier.java和XPackBuild.java
@@ -25,7 +25,6 @@ options="${elasticsearch}/modules/x-pack/x-pack-core/x-pack-core-6.3.1.jar${symb
 #javac -cp "${options}" org/elasticsearch/license/LicenseVerifier.java
 javac -cp "${options}" ${DIR}/org/elasticsearch/xpack/core/XPackBuild.java
 
-exit 1
 
 #3. 替换x-pack-core-6.3.1.jar的class文件
 lv_class=./org/elasticsearch/license/LicenseVerifier.class

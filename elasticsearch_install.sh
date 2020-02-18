@@ -1,12 +1,14 @@
 #!/bin/bash
+
 install_path=/usr/local/ElasticSearch
-network_host='192.168.2.250' #must fix
+network_host='192.168.2.251' #must fix
 group=elastic
 user=elastic
 elasticsearch=${install_path}/elasticsearch-6.3.1
 logstash=${install_path}/logstash-6.3.2
 
 
+## === 安装Elasticsearch ==========================================================================================
 #groupadd $group
 #useradd $user -g $group
 #
@@ -23,14 +25,18 @@ logstash=${install_path}/logstash-6.3.2
 #echo "export PATH=\$PATH:$elasticsearch/bin" >> /etc/profile
 #source /etc/profile
 
-#启动
-#cd elasticsearch-<version>
-#${elasticsearch}/bin/elasticsearch
-
 #安装elasticsearch 插件 elasticsearch-sql
 ${elasticsearch}/bin/elasticsearch-plugin install https://github.com/NLPchina/elasticsearch-sql/releases/download/6.3.1.0/elasticsearch-sql-6.3.1.1.zip
+
+
+#启动
+cd elasticsearch-<version>
+${elasticsearch}/bin/elasticsearch
+
 exit 1
 
+
+# === logstash (不用这种方案了) ==================================================================================
 #增量同步MySQL数据到 Elasticsearch
 yum install gem -y
 rm -rf ./logstash-6.3.2
@@ -50,12 +56,8 @@ mv ./mysql-connector-java-5.1.36.jar ${logstash}/tools
 
 
 
-
-
-
+# === 问题处理 ==================================================================================================
 #yum install java-1.8.0-openjdk* -y
-
-
 
 #解决办法：切换root账户 vim /etc/sysctl.conf
 #
@@ -64,7 +66,6 @@ mv ./mysql-connector-java-5.1.36.jar ${logstash}/tools
 #接着执行 sysctl -p
 #
 #切回ES账户重新启动问题解决
-
 
 #2. max file descriptors [4096] for elasticsearch process is too low, increase to at least [65536]
 #解决：切换到root用户，编辑limits.conf 添加类似如下内容
@@ -75,9 +76,9 @@ mv ./mysql-connector-java-5.1.36.jar ${logstash}/tools
 # * soft nproc 2048
 # * hard nproc 4096
 
-
-
 exit 1;
+
+
 
 # 主节点 配置 ==================================================================
 # IP [192.168.2.250]
@@ -126,6 +127,7 @@ discovery.zen.ping.unicast.hosts: ["192.168.2.250"]
 
 
 
+# === 参考文档 ====================================================================
 #https://github.com/siddontang/go-mysql-elasticsearch/blob/master/README.md
 #https://www.linuxhub.org/?p=4665
 #https://juejin.im/entry/58f827d78d6d8100587591c9
