@@ -75,6 +75,7 @@ mv ./mysql-connector-java-5.1.36.jar ${logstash}/tools
 # * soft nproc 2048
 # * hard nproc 4096
 
+# 添加后ssh需要重新登录，或用户重新登录 （ulimit -a 查看是否生效）
 
 
 exit 1;
