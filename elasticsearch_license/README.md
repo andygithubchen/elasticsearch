@@ -44,7 +44,9 @@ https://blog.csdn.net/xiaoyu_BD/article/details/81698882
 failed to load plugin class [org.elasticsearch.xpack.core.XPackPlugin]
 ```
 用下面的步骤设置密码：
- bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
- bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password 
+
+bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
+ 
+bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password 
 
 
